@@ -22,7 +22,6 @@ jobs:
         USER: ${{secrets.USER}}
         PASS: ${{secrets.PASS}}}
       run: npx playwright test
-      end:
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
