@@ -10,8 +10,8 @@ export class LoginPage {
     }
 
     async login(user: string, pass: string): Promise<DashboardPage> {        
-        await this.page.getByPlaceholder('Username').fill('');
-        await this.page.getByPlaceholder('Password').fill('');
+        await this.page.getByPlaceholder('Username').fill(user);
+        await this.page.getByPlaceholder('Password').fill(pass);
         await this.page.getByRole('button', {name: 'Login'}).click();
 
         await this.page.waitForURL('/web/index.php/dashboard/index');

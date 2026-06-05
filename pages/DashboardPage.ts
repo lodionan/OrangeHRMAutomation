@@ -10,7 +10,7 @@ export class DashboardPage {
     };
 
     async openMyInfo(): Promise<ProfilePage> {
-        await this.page.locator('li:nth-child(6) > a').click();
+        await this.page.getByRole('link', {name: 'My Info'}).click();
         await this.page.waitForURL('/web/index.php/pim/viewPersonalDetails/empNumber/7');
         return new ProfilePage(this.page);
     };
