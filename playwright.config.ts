@@ -1,11 +1,20 @@
 import { defineConfig, devices } from '@playwright/test';
+import { defineBddConfig } from 'playwright-bdd';
 import path from 'path';
+
+const testDir = defineBddConfig({
+  features: 'features/*.feature',
+  steps: 'steps/**/*.ts',
+  importTestFrom: {
+    file: 'tests/pageFixtures/pageFixtures.ts',
+  },
+});
 
 export const STORAGE_STATE = path.resolve(__dirname, '.auth/user.json');
 
 export default defineConfig({
 
-  testDir: './tests',
+  testDir,
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
@@ -20,7 +29,8 @@ export default defineConfig({
   projects: [
     {
       name: 'setup',
-      testMatch: /auth\.setup\.ts/,
+      testDir: './tests',
+      testMatch: /.*auth\.setup\.ts/,
     },
 
     {

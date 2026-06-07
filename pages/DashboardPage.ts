@@ -9,8 +9,8 @@ export class DashboardPage {
         await expect(this.page.locator('h6.oxd-text')).toBeVisible();
     };
 
-    async openMyInfo(): Promise<ProfilePage> {
-        await this.page.getByRole('link', {name: 'My Info'}).click();
+    async openMyInfo(pageName: string): Promise<ProfilePage> {
+        await this.page.getByRole('link', {name: pageName}).click();
         await this.page.waitForURL('/web/index.php/pim/viewPersonalDetails/empNumber/7');
         return new ProfilePage(this.page);
     };
